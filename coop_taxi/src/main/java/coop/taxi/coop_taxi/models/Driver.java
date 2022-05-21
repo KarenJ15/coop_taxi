@@ -1,10 +1,13 @@
 package coop.taxi.coop_taxi.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -28,4 +31,7 @@ public class Driver {
 
     @Column(name = "DOCUMENT")
     private String document;
+
+    @OneToMany(mappedBy = "driver")
+    private List<Travel> travels;
 }

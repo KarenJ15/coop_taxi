@@ -34,4 +34,12 @@ public class Travel {
     @ManyToOne
     @JoinColumn(name = "TAXI_ID", nullable = false )
     private Taxi taxi;
+
+    @ManyToOne
+    @JoinColumn(name="DRIVER_ID", nullable = false)
+    private Driver driver;
+
+    @ManyToOne
+    @JoinColumn(name="CLIENT_ID", nullable = false)
+    private Client client;
 }
