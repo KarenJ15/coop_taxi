@@ -11,11 +11,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="TBL_CLIENTE" )
+@Table(name="TBL_CLIENT" )
 @Getter
 @Setter
 
-public class Cliente {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

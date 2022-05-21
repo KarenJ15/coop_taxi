@@ -11,20 +11,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="TBL_COOPERATIVA" )
+@Table(name="TBL_DRIVER" )
 @Getter
-@Setter 
-public class Cooperativa {
+@Setter
+
+public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "NAME")
-    private String name;  
-    
-    @Column(name = "UBICATION")
-    private String ubication;
+    private String name; 
 
-    @Column(name = "PHONE")
-    private String phone;
+    @Column(name = "LICENCE_TYPE")
+    private String licenceType;
+
+    @Column(name = "DOCUMENT")
+    private String document;
 }

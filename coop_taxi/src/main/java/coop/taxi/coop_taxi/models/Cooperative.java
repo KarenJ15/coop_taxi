@@ -5,27 +5,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="TBL_CHOFER" )
+@Table(name="TBL_COOPERATIVE" )
 @Getter
-@Setter
-
-public class Chofer {
+@Setter 
+public class Cooperative {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "NAME")
-    private String name; 
+    private String name;  
+    
+    @Column(name = "UBICATION")
+    private String ubication;
 
-    @Column(name = "LICENCE_TYPE")
-    private String licenceType;
+    @Column(name = "PHONE")
+    private String phone;
 
-    @Column(name = "DOCUMENT")
-    private String document;
+    @OneToMany(mappedBy = "cooperative")
+    private List<Taxi> taxis;
+
+    
 }
