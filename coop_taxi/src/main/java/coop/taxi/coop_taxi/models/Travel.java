@@ -13,14 +13,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="TBL_TRAVEL" )
+@Table(name="TBL_TRAVELS" )
 @Getter
 @Setter
 
 public class Travel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(name = "ORIGIN")
     private String origin; 

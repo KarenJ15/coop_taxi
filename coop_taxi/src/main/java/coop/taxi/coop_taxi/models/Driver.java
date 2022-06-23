@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="TBL_DRIVER" )
+@Table(name="TBL_DRIVERS" )
 @Getter
 @Setter
 

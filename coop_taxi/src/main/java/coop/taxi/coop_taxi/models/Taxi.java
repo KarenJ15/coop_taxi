@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="TBL_TAXI" )
+@Table(name="TBL_TAXIS" )
 @Getter
 @Setter 
 public class Taxi {

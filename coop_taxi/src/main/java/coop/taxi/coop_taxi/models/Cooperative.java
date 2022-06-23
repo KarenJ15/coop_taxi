@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="TBL_COOPERATIVE" )
+@Table(name="TBL_COOPERATIVES" )
 @Getter
 @Setter 
 public class Cooperative {
