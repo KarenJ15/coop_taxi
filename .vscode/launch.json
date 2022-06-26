@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CoopTaxiApplication<coop_taxi>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "coop.taxi.coop_taxi.CoopTaxiApplication",
+            "projectName": "coop_taxi",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
