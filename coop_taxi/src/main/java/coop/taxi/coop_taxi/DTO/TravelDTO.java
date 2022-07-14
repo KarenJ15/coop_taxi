@@ -8,9 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-public class TravelDTO {
+public class TravelDTO extends NewTravelDTO{
     private int id;
-    private String origin; 
-    private String destination;
-    private Float cost;
 }

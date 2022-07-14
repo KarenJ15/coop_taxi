@@ -33,5 +33,7 @@ public class Cooperative {
     @OneToMany(mappedBy = "cooperative")
     private List<Taxi> taxis;
 
+    public void setTravel(Travel travel) {
+    }
     
 }

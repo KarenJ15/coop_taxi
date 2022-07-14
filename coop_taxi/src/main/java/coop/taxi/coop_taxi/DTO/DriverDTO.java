@@ -1,5 +1,7 @@
 package coop.taxi.coop_taxi.DTO;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,9 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-public class DriverDTO {
+public class DriverDTO extends NewDriverDTO{
     private Long id;
-    private String name; 
-    private String licenceType;
-    private String document;
+    private List<TravelDTO> travels;
 }

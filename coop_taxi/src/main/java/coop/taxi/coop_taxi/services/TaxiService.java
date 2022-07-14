@@ -4,12 +4,13 @@ import java.util.List;
 
 import coop.taxi.coop_taxi.DTO.NewTaxiDTO;
 import coop.taxi.coop_taxi.DTO.TaxiDTO;
+import coop.taxi.coop_taxi.DTO.TaxiTravelDTO;
 
 public interface TaxiService {
-    public TaxiDTO create(NewTaxiDTO taxiDTO);
-    public TaxiDTO retrieve(Long id);
-    public TaxiDTO update(TaxiDTO taxiDTO, Long id);
-    public void delete (Long id);
+    public TaxiDTO create(Long idTravel, NewTaxiDTO taxiDTO);
+    public TaxiTravelDTO retrieve(Long idTravel, Long id);
+    public TaxiTravelDTO update(TaxiDTO taxiDTO, Long idTravel, Long id);
+    public void delete(Long idTravel, Long id);
 
-    public List<TaxiDTO> list();
+    public List<TaxiDTO> list(Long idTravel);
 }

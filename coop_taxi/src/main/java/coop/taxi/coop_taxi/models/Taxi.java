@@ -8,7 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import java.util.Calendar;
 import java.util.List;
 
 import lombok.Getter;
@@ -34,12 +38,37 @@ public class Taxi {
 
     @Column(name = "REGISTRATION")
     private String registration;
+    
+    @Column(name = "CREATED_DATE")    
+    private Calendar createdDate;
+    @Column(name = "CREATED_BY")    
+    private String createdBy;  
 
+    @Column(name = "UPDATED_DATE")    
+    private Calendar updatedDate;
+    @Column(name = "UPDATED_BY")    
+    private String updatedBy;  
+
+    @PrePersist
+    public void prePersist(){
+        createdDate = Calendar.getInstance();
+        createdBy = "user1";
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        updatedDate = Calendar.getInstance();
+        updatedBy = "user2";
+    }
+    
     @ManyToOne
     @JoinColumn(name = "COOPERATIVE_ID", nullable = false )
     private Cooperative cooperative;
 
     @OneToMany(mappedBy = "taxi")
     private List<Travel> travels;
+
+    public void setTravel(Travel travel) {
+    }
 
 }

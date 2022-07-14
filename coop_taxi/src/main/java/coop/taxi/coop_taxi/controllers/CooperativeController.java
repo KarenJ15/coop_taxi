@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,41 +17,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import coop.taxi.coop_taxi.DTO.CooperativeDTO;
+import coop.taxi.coop_taxi.DTO.CooperativeTravelDTO;
 import coop.taxi.coop_taxi.DTO.NewCooperativeDTO;
 import coop.taxi.coop_taxi.services.CooperativeService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/cooperative")
+@RequestMapping("/cooperatives")
 public class CooperativeController {
-    private final CooperativeService service;
     
-    @Autowired
-    public CooperativeController (CooperativeService srv){
+    final CooperativeService service;
+
+    public CooperativeController(CooperativeService srv){
         this.service = srv;
     }
-    @PostMapping()
-    public ResponseEntity<CooperativeDTO> create(@Valid @RequestBody NewCooperativeDTO cooperativeDTO){
-        CooperativeDTO result = service.create(cooperativeDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+
+    /* ================ CREATE ================ */
+    @PostMapping("/{id}/cooperatives")
+    public ResponseEntity<CooperativeDTO> create(@PathVariable("id") Long id, @Valid @RequestBody NewCooperativeDTO cooperativeDTO){
+        CooperativeDTO cooperativDTO = service.create(id, cooperativeDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(cooperativDTO);        
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<CooperativeDTO> retrieve(@PathVariable("id") Long id){
-        CooperativeDTO result = service.retrieve(id);
+
+    /* ================ RETRIEVE ================ */
+    @GetMapping("/{idTravel}/cooperatives/{id}")
+    public ResponseEntity<CooperativeTravelDTO> retrive(@PathVariable("idTravel") Long idTravel, @PathVariable("id") Long id){
+        CooperativeTravelDTO result = service.retrieve(idTravel, id);
+        return ResponseEntity.ok().body(result);        
+    }
+
+    /* ================ UPDATE ================ */
+    @PutMapping("/{idTravel}/cooperatives/{id}")
+    public ResponseEntity<CooperativeTravelDTO> update(@RequestBody CooperativeDTO cooperativeDTO, @PathVariable("idTravel") Long idTravel, @PathVariable("id") Long id){
+        CooperativeTravelDTO result = service.update(cooperativeDTO, idTravel, id);
         return ResponseEntity.ok().body(result);
     }
-    @GetMapping()
-    public ResponseEntity<List<CooperativeDTO>> list(){
-        List <CooperativeDTO> result = service.list();
-        return ResponseEntity.ok().body(result);
+
+    /* ================ DELETE ================ */
+    @DeleteMapping("/{idTravel}/cooperatives/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("idTravel") Long idTravel, @PathVariable("id") Long id){
+        service.delete(idTravel, id);
+        return ResponseEntity.noContent().build();
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<CooperativeDTO> update(@RequestBody CooperativeDTO cooperativeDTO, @PathVariable("id") Long id){
-        CooperativeDTO result = service.update(cooperativeDTO, id);
-        return ResponseEntity.ok().body(result);
+
+    /* ================ LIST ================ */
+    @GetMapping("/{id}/cooperatives")
+    public ResponseEntity<List<CooperativeDTO>> list(@PathVariable("id") Long id){
+        List<CooperativeDTO> cooperatives = service.list(id);
+        return ResponseEntity.ok().body(cooperatives);        
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable ("id") Long id){
-        service.delete(id);
-        return ResponseEntity.ok().body("Cooperativa eliminada");
-    }
+
 }
