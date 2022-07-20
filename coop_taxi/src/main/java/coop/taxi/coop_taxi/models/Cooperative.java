@@ -34,6 +34,9 @@ public class Cooperative {
     private List<Taxi> taxis;
 
     public void setTravel(Travel travel) {
+        
     }
+
+
     
 }

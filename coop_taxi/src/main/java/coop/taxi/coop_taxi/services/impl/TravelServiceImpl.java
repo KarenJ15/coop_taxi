@@ -48,8 +48,6 @@ public class TravelServiceImpl implements TravelService{
             repository.save(travel);
             result.add(modelMapper.map(travel, TravelDTO.class));
         }
-        /*options.forEach(op -> {
-        });        */
         return result;
     }
 
