@@ -1,3 +1,5 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { ChangeEvent, useEffect, useState } from "react";
 import { FaArrowLeft, FaSave } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -94,7 +96,7 @@ export const TravelForm = () => {
             <input						
               type="text"
               className="form-control"
-							placeholder="Ingrese el origen del travel"
+							placeholder="Ingrese el origen del viaje"
               id="origin"
               required
               value={travel.origin}

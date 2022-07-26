@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Home } from "../src/components/Home";
@@ -18,7 +19,7 @@ const App: React.FC = () => {
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/travels"} className="nav-link">
-              Exámenes
+              Viajes
             </Link>
           </li>          
         </div>
