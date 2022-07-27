@@ -1,5 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { ChangeEvent, useEffect, useState } from "react";
 import { FaArrowLeft, FaSave } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -27,11 +25,6 @@ export const TravelForm = () => {
         const { name, value } = event.target;
         setTravel({ ...travel, [name]: value });
     };
-
-		const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-			const { name, value } = event.target;
-			setTravel({ ...travel, [name]: value });
-	};
 
     const saveTravel = () => {        
       if(travel.id !== null)
@@ -81,16 +74,16 @@ export const TravelForm = () => {
 					<div>
 						{ travel.id !== null ? (<h1>Actualizado viaje {travel.destination}</h1>) : (<h1>Registro de nuevo viaje</h1>) }            
 						<div className="form-group">
-						<label htmlFor="destino">Destino</label>
+						<label htmlFor="destination">Destino</label>
             <input
               type="text"
 							placeholder="Ingrese el destino del viaje"
               className="form-control"
-              id="destino"
-              required
+              id="destination"
+              
               value={travel.destination}
               onChange={handleInputChange}
-              name="Destino"
+              name="destination"
             />
 						<label htmlFor="origin">Origen</label>
             <input						
@@ -101,20 +94,18 @@ export const TravelForm = () => {
               required
               value={travel.origin}
               onChange={handleInputChange}
-              name="Origin"
+              name="origin"
             />
 						<label htmlFor="cost">Costo </label>
             <input						
               type="float"
               className="form-control"
-              id="costo"
+              id="cost"
 							max="50"
 							min="1.5"
-              required
-              
               value={travel.cost}
               onChange={handleInputChange}
-              name="Costo"
+              name="cost"
             />
             
 						<br />

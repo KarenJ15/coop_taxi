@@ -3,42 +3,47 @@ import ReactDOM from 'react-dom';
 import { ChangeEvent, useEffect, useState } from "react";
 import { FaArrowLeft, FaSave } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import ITravelModel from "../../models/Travel";
-import TravelService from "../../services/TravelService";
+import ITaxiModel from "../../models/Taxi";
+import TaxiService from "../../services/TaxiService";
 
-export const TravelForm = () => {
+export const TaxiForm = () => {
 	
   const { id }= useParams();
   let navigate = useNavigate();
 
     //Model vacío
-    const initialTravelModel : ITravelModel = {
-      id: null,
-      origin: "",
-      destination: "",
-      cost: 1.5,
+    const initialTaxiModel : ITaxiModel = {
+        id: null,
+        licensePlate: "",
+        model: "",
+        tradeMark: "",
+        registration: 2012,
+        createdDate: " ",
+        createdBy:" ",
+        updatedDate: 14.05,
+        updatedBy: ""
     };
 
     //Hooks para gestionar el modelo
-    const [travel, setTravel] = useState<ITravelModel>(initialTravelModel);
+    const [taxi, setTaxi] = useState<ITaxiModel>(initialTaxiModel);
     
     //Escucha los cambios en cada control Input y los asigna a los valores del Modelo
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setTravel({ ...travel, [name]: value });
+        setTaxi({ ...taxi, [name]: value });
     };
 
 		const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
 			const { name, value } = event.target;
-			setTravel({ ...travel, [name]: value });
+			setTaxi({ ...taxi, [name]: value });
 	};
 
-    const saveTravel = () => {        
-      if(travel.id !== null)
+    const saveTaxi = () => {        
+      if(taxi.id !== null)
       {
-        TravelService.update(travel)
+        TaxiService.update(taxi)
         .then((response: any) => {
-          navigate("/travels");
+          navigate("/taxis");
           console.log(response.data);
         })
         .catch((e: Error) => {
@@ -47,9 +52,9 @@ export const TravelForm = () => {
       }
       else
       {
-			  TravelService.create(travel)
+			  TaxiService.create(taxi)
           .then((response: any) => {    
-            navigate("/travels");
+            navigate("/taxis");
             console.log(response.data);
           })
           .catch((e: Error) => {
@@ -65,9 +70,9 @@ export const TravelForm = () => {
 
 
     const getTaxi = (id: any) => {
-      TravelService.retrieve(id)
+      TaxiService.retrieve(id)
         .then((response: any) => {
-          setTravel(response.data); //Víncula el resultado del servicio con la función del Hook useState
+          setTaxi(response.data); //Víncula el resultado del servicio con la función del Hook useState
           console.log(response.data);
         })
         .catch((e: Error) => {
@@ -79,50 +84,58 @@ export const TravelForm = () => {
 		return ( //JSX
 			<div className="submit-form">				
 					<div>
-						{ travel.id !== null ? (<h1>Actualizado viaje {travel.destination}</h1>) : (<h1>Registro de nuevo viaje</h1>) }            
+						{ taxi.id !== null ? (<h1>Actualizado taxi {taxi.licensePlate}</h1>) : (<h1>Registro de nuevo taxi</h1>) }            
 						<div className="form-group">
-						<label htmlFor="destino">Destino</label>
+						<label htmlFor="plate">Placa de matricula</label>
             <input
               type="text"
-							placeholder="Ingrese el destino del viaje"
+							placeholder="Ingrese la placa de matricula del taxi"
               className="form-control"
-              id="destino"
+              id="plate"
               required
-              value={travel.destination}
+              value={taxi.licensePlate}
               onChange={handleInputChange}
-              name="Destino"
+              name="plate"
             />
-						<label htmlFor="origin">Origen</label>
+						<label htmlFor="model">Modelo</label>
             <input						
               type="text"
               className="form-control"
-							placeholder="Ingrese el origen del viaje"
-              id="origin"
+							placeholder="Ingrese el modelo del taxi"
+              id="model"
               required
-              value={travel.origin}
+              value={taxi.model}
               onChange={handleInputChange}
-              name="Origin"
+              name="model"
             />
-						<label htmlFor="cost">Costo </label>
+            <label htmlFor="tradeMark">Mark </label>
             <input						
-              type="float"
+              type="text"
               className="form-control"
-              id="costo"
-							max="50"
-							min="1.5"
+              id="tradeMark"
               required
-              
-              value={travel.cost}
+              value={taxi.tradeMark}
               onChange={handleInputChange}
-              name="Costo"
+              name="tradeMark"
+            />
+						<label htmlFor="registration">Matricula</label>
+            <input						
+              type="number"
+              className="form-control"
+              placeholder="Ingrese el modelo del taxi"
+              id="registration"
+              required
+              value={taxi.registration}
+              onChange={handleInputChange}
+              name="registration"
             />
             
 						<br />
 							<div className="btn-group" role="group">								
-                <Link to={"/travels"} className="btn btn-primary">
+                <Link to={"/taxis"} className="btn btn-primary">
                     <FaArrowLeft /> Volver
                 </Link>
-								<button type="button" onClick={saveTravel} className="btn btn-success">
+								<button type="button" onClick={saveTaxi} className="btn btn-success">
                   <FaSave />Guardar
                 </button>
 							</div>
